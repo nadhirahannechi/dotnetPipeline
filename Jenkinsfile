@@ -33,7 +33,8 @@ pipeline {
     stage('Publish') { 
        steps { 
            sh 'dotnet test XUnitTestProject/XUnitTestProject.csproj --configuration Release --no-restore' 
-          } 
+          }
+    }
     stage('Archive') { 
        steps { 
            sh 'tar -cvzf WebApplication/bin/Release/netcoreapp3.1/publish --strip-components=1 publish' 
