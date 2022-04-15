@@ -41,8 +41,7 @@ pipeline {
            archive 'publish.tar.gz' 
           } 
        }
-       } 
-
+    
    stage('Nexus Upload Stage') {
      agent none 
      steps { 
