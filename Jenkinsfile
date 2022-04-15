@@ -19,7 +19,7 @@ pipeline {
           } 
        } 
  
- stage(''Test: Unit Test') { 
+ stage('Test: Unit Test') { 
     steps { 
         sh 'dotnet test XUnitTestProject/XUnitTestProject.csproj --configuration Release --no-restore' 
       }
@@ -55,9 +55,9 @@ pipeline {
       steps { 
       sh 'ls -a'
       timeout(time: 200, unit: 'SECONDS') {
-          dir('dist') {
+          dir('WebApplication/bin/Release/netcoreapp3.1/publish') {
           sh 'ls' 
-          sh 'cp ../manifest.yml manifest.yml'
+          sh 'cp ../../../../../manifest.yml manifest.yml'
           pushToCloudFoundry(
               target: 'https://api.cf.us10.hana.ondemand.com/',
                organization: '2b1f4fe8trial',
