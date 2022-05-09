@@ -45,27 +45,14 @@ pipeline {
    stage('Nexus Upload Stage') {
      agent none 
      steps { 
-        withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId: 'nexus_manvenuser',usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']]) {
-               sh 'curl -v -u ${USERNAME}:${PASSWORD} --upload-file publish.tar.gz http://artefact.focus.com.tn:8081/repository/aspNet/publish.tar.gz' 
-           } 
+       sh 'ls'
        } 
    } 
 
     stage('Deploy Stage') {
       steps { 
       sh 'ls -a'
-      timeout(time: 200, unit: 'SECONDS') {
-          dir('WebApplication/bin/Release/netcoreapp3.1/publish') {
-          sh 'ls' 
-          sh 'cp ../../../../../manifest.yml manifest.yml'
-          pushToCloudFoundry(
-              target: 'https://api.cf.us10.hana.ondemand.com/',
-               organization: '2b1f4fe8trial',
-               cloudSpace: 'dev',
-                credentialsId: 'nadhira',
-               )
-        }
-      }
+     
     }
    }
   }
